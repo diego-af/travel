@@ -115,9 +115,9 @@ const FormTravell = () => {
 		e.preventDefault();
 		if (e.target.files && e.target.files[0]) {
 			const image = e.target.files[0];
-			console.log(image);
+
 			await setFile(image);
-			console.log(file?.type, 'tipo');
+
 			if (
 				file?.type === 'image/png' ||
 				file?.type === 'image/jpeg' ||
@@ -125,15 +125,15 @@ const FormTravell = () => {
 			) {
 				sendFile(image);
 			} else {
+				toast.info('Selecione uma imagem ou arquivo pdf');
 				console.log('arquivo invalido');
 			}
 		}
 	};
 
 	const onSubmit = async (data: FormData) => {
-		console.log(data, 'data');
 		if (!file) {
-			alert('selecione um aqruivo pra continuar');
+			toast.info('Selecione uma imagem ou arquivo pdf');
 			return;
 		}
 		setLoading(true);
@@ -172,7 +172,6 @@ const FormTravell = () => {
 			const storageRef = ref(storage, `images/${file?.name}/${uid}`);
 			uploadBytes(storageRef, image).then((snapshot) => {
 				getDownloadURL(snapshot.ref).then((url) => {
-					console.log(url, 'url de acesso da foto');
 					setUrl(url);
 				});
 			});
