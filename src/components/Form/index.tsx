@@ -119,9 +119,9 @@ const FormTravell = () => {
 			await setFile(image);
 
 			if (
-				file?.type === 'image/png' ||
-				file?.type === 'image/jpeg' ||
-				file?.type === 'application/pdf'
+				image.type == 'application/pdf' ||
+				image.type === 'image/png' ||
+				image.type === 'image/jpeg'
 			) {
 				sendFile(image);
 			} else {
@@ -169,7 +169,7 @@ const FormTravell = () => {
 	const sendFile = async (image: File) => {
 		if (image) {
 			const uid = uuidV4();
-			const storageRef = ref(storage, `images/${file?.name}/${uid}`);
+			const storageRef = ref(storage, `images/${image?.name}/${uid}`);
 			uploadBytes(storageRef, image).then((snapshot) => {
 				getDownloadURL(snapshot.ref).then((url) => {
 					setUrl(url);
