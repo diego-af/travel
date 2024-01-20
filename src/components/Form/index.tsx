@@ -132,10 +132,6 @@ const FormTravell = () => {
 	};
 
 	const onSubmit = async (data: FormData) => {
-		if (!file) {
-			toast.info('Selecione uma imagem ou arquivo pdf');
-			return;
-		}
 		setLoading(true);
 		await addDoc(collection(db, 'travels'), {
 			name: data.name,

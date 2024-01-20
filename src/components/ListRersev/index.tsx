@@ -164,9 +164,11 @@ const ListReserv = () => {
 								<S.Name>{item?.name}</S.Name>
 								<S.Valor>{formatMoney(Number(item?.price))}</S.Valor>
 								<S.Status>{item?.status}</S.Status>
-								<S.Link href={item.image} download>
-									<DownloadIcon color='#b789fb' style={{cursor: 'pointer'}} />
-								</S.Link>
+								{item.image && (
+									<S.Link href={item.image} download>
+										<DownloadIcon color='#b789fb' style={{cursor: 'pointer'}} />
+									</S.Link>
+								)}
 							</S.Person>
 						))}
 				</S.ListPersons>
