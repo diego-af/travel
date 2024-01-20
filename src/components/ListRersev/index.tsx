@@ -1,6 +1,6 @@
 import {Suspense, useContext, useEffect, useState} from 'react';
 import * as S from './style';
-import {CalendarDays, DownloadIcon} from 'lucide-react';
+import {CalendarDays, DownloadIcon, Ban} from 'lucide-react';
 import {collection, getDocs, query} from 'firebase/firestore';
 import {db} from '../../server/firebase';
 import {TravellContext, TravelsData} from '../../provider';
@@ -164,9 +164,15 @@ const ListReserv = () => {
 								<S.Name>{item?.name}</S.Name>
 								<S.Valor>{formatMoney(Number(item?.price))}</S.Valor>
 								<S.Status>{item?.status}</S.Status>
-								<S.Link href={item.image} download>
-									<DownloadIcon color='#b789fb' style={{cursor: 'pointer'}} />
-								</S.Link>
+								{item.image ? (
+									<S.Link href={item.image} download>
+										<DownloadIcon color='#b789fb' style={{cursor: 'pointer'}} />
+									</S.Link>
+								) : (
+									<S.Link href={item.image} download>
+										<Ban color='red' />
+									</S.Link>
+								)}
 							</S.Person>
 						))}
 				</S.ListPersons>
